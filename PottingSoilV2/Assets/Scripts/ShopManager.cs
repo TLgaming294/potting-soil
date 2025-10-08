@@ -12,10 +12,18 @@ public class ShopManager : MonoBehaviour
     public GameObject Content;
     public GameObject shopUpgradePrefab;
 
-    public void Upgrade1()
+    public void Upgrade(int id)
     {
-        gameManager.GetComponent<GameManager>().incrementSoilAddJa();
-        
+        switch (id)
+        {
+            case 1:
+                gameManager.GetComponent<GameManager>().incrementSoilAddJa();
+                break;
+            default:
+                Debug.Log("Invalid upgrade id");
+                break;
+        }
+
     }
 
 
@@ -23,40 +31,52 @@ public class ShopManager : MonoBehaviour
     {
         Content = GameObject.Find("Content");
         shopView = GameObject.Find("ShopView");
+        addExchangables();
         shopView.SetActive(false);
     }
 
     public void toggleShop()
     {
         shopView.SetActive(!shopView.activeSelf);
-        unlockUpgrade();
+        unlockExchange(1);
     }
 
-    public class Upgrade
+
+
+    public void unlockExchange(int id)
+    {
+
+        CurrencyExchange exchange = AllExchanges.exchangables.Find(x => x.id == id);
+        if (exchange != null)
+        { 
+            GameObject exchangeObj = Instantiate(shopUpgradePrefab, Content.transform);
+            exchangeObj.name = exchange.currencyExchangeName;
+            exchangeObj.transform.Find("ItemName").GetComponent<TMP_Text>().text = exchange.currencyExchangeName;
+            exchangeObj.transform.Find("Price").GetComponent<TMP_Text>().text = exchange.cost.ToString();
+            exchangeObj.GetComponent<Button>().onClick.AddListener( () => Upgrade(id));
+        }
+        else
+        {
+            Debug.Log("Exchange not found");
+        }
+
+    }
+    public class CurrencyExchange
     {
         public int id;
-        public string upgradeName;
+        public string currencyExchangeName;
         public int cost;
-        public Sprite upgradeIcon;
+        public Sprite exchangeIcon;
         public Sprite costIcon;
     }
 
-    public void unlockUpgrade()
+    public static class AllExchanges
     {
-        Upgrade upgrade1 = new Upgrade();
-        upgrade1.id = 1;
-        upgrade1.upgradeName = "Soil +1 Ja";
-        upgrade1.cost = 50;
-        upgrade1.upgradeIcon = Resources.Load<Sprite>("Icons/soil_icon");
-        upgrade1.costIcon = Resources.Load<Sprite>("Icons/ja_icon");
-
-        GameObject upgradeObj1 = Instantiate(shopUpgradePrefab, Content.transform);
-        upgradeObj1.transform.Find("ItemName").GetComponent<TMP_Text>().text = upgrade1.upgradeName;
-        upgradeObj1.transform.Find("Price").GetComponent<TMP_Text>().text = upgrade1.cost.ToString();
-        //upgradeObj1.transform.Find("Image").GetComponent<UnityEngine.UI.Image>().sprite = upgrade1.upgradeIcon;
-        //upgradeObj1.transform.Find("PriceImage").GetComponent<UnityEngine.UI.Image>().sprite = upgrade1.costIcon;
-        upgradeObj1.transform.SetParent(Content.transform, false);
-        upgradeObj1.GetComponent<Button>().onClick.AddListener(Upgrade1);
+        public static List<CurrencyExchange> exchangables = new List<CurrencyExchange>();
     }
 
+    public void addExchangables()
+    { 
+        AllExchanges.exchangables.Add(new CurrencyExchange { id = 1, currencyExchangeName = "Soil to Mulch", cost = 50 });
+    }
 }

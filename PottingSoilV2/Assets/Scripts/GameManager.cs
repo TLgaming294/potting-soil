@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
 
     public void incrementSoilAddJa()
     {
+        if(soilCounter<=0)
+        {
+            Debug.Log("insufficient Soil");
+            return;
+        }
         mulchCount++;
         soilCounter--;
     }
