@@ -1,0 +1,84 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.Common;
+using UnityEngine;
+
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    public List<Unlock> unlocks = new List<Unlock>();
+    // Start is called before the first frame update
+    void Start()
+    {
+        // List<Unlock> unlocks = new List<Unlock>
+        // {
+        //     new Unlock(1, "Shop", false),
+        //     new Unlock(2, "Level 2", false)
+        // };
+        unlocks.Add(new Unlock(1, "Shop", false));
+        Unlock(1);
+
+    }
+
+    // Update is called once per frame
+    public void Unlock(int id)
+    {
+        unlocks.Find(x => x.getId() == id).setIsUnlocked(true);
+
+        UpdateUnlocks();
+    }
+
+
+    void UpdateUnlocks()
+    {
+        foreach (Unlock unlock in unlocks)
+        {
+            if (unlock.getIsUnlocked())
+            {
+                switch (unlock.getId())
+                {
+                    case 1:
+                        GameObject.Find("ShopButton").SetActive(true);
+                        break;
+                    // case 2:
+                    //     GameObject.Find("Level2").SetActive(true);
+                    //     break;
+                    default:
+                        Debug.Log("Invalid unlock id");
+                        break;
+                }
+            }
+        }
+    }
+}
+
+    
+
+
+
+public class Unlock
+{
+    public Unlock(int id, string name, bool isUnlocked)
+    {
+        this.id = id;
+        this.name = name;
+        this.isUnlocked = isUnlocked;
+    }
+    public int id;
+    string name;
+    public bool isUnlocked;
+
+    public int getId()
+    {
+        return this.id;
+    }
+    public bool getIsUnlocked()
+    {
+        return this.isUnlocked;
+    }
+    public void setIsUnlocked(bool isUnlocked)
+    {
+        this.isUnlocked = isUnlocked;
+    }
+}
+

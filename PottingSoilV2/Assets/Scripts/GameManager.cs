@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 {
     public TMP_Text soilCounterText;
     public TMP_Text mulchCounterText;
+    public GameObject unlockManager;
 
     private int soilCounter;
 
@@ -24,6 +25,9 @@ public class GameManager : MonoBehaviour
     {
         soilAddJa = 2;
         mulchCount = 1;
+        GameObject.Find("ShopButton").SetActive(false);
+        unlockManager = GameObject.Find("UnlockManager");
+        //unlockManager.GetComponent<NewBehaviourScript>().Unlock(1);
     }
 
     public void incrementSoilAddJa()
