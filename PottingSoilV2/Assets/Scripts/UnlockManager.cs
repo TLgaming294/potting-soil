@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    public GameObject shopButton;
     public List<Unlock> unlocks = new List<Unlock>();
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     public void Unlock(int id)
     {
         unlocks.Find(x => x.getId() == id).setIsUnlocked(true);
@@ -28,17 +30,15 @@ public class NewBehaviourScript : MonoBehaviour
         UpdateUnlocks();
     }
 
-
+    [ContextMenu("Update Unlocks")]
     void UpdateUnlocks()
     {
         foreach (Unlock unlock in unlocks)
         {
-            if (unlock.getIsUnlocked())
-            {
                 switch (unlock.getId())
                 {
                     case 1:
-                        GameObject.Find("ShopButton").SetActive(true);
+                        shopButton.SetActive(unlock.getIsUnlocked());
                         break;
                     // case 2:
                     //     GameObject.Find("Level2").SetActive(true);
@@ -47,7 +47,6 @@ public class NewBehaviourScript : MonoBehaviour
                         Debug.Log("Invalid unlock id");
                         break;
                 }
-            }
         }
     }
 }
@@ -55,7 +54,7 @@ public class NewBehaviourScript : MonoBehaviour
     
 
 
-
+[System.Serializable]
 public class Unlock
 {
     public Unlock(int id, string name, bool isUnlocked)
