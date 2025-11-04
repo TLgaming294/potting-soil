@@ -330,7 +330,7 @@ RectTransform:
   - {fileID: 1151041553}
   - {fileID: 1743071739}
   - {fileID: 635745144}
-  m_Father: {fileID: 519420032}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -386,8 +386,8 @@ Canvas:
   m_GameObject: {fileID: 425697224}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -436,7 +436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: -539.99994}
+  m_AnchoredPosition: {x: -300, y: -540}
   m_SizeDelta: {x: 600, y: 1080}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &491774667
@@ -626,7 +626,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 772584312}
-  - {fileID: 425697225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586737174
@@ -2054,6 +2053,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17587bb3b9e2b85468692b8c072089fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopButton: {fileID: 1151041552}
+  unlocks: []
 --- !u!1 &1743071738
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,6 +2332,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 425697225}
   - {fileID: 519420032}
   - {fileID: 1912510874}
   - {fileID: 1220176892}
