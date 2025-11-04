@@ -22,28 +22,21 @@ public class CurrencyManager : MonoBehaviour
 
 public class Currency
 {
-    private Vector2Int amount;
+    public BigInteger value;
 
-    public Currency(int initialAmount, int initialEValue)
+    public string toMantissaView()
     {
-        amount = new Vector2Int(initialAmount, initialEValue);
-    }
+        string raw = value.ToString();
+        if (raw.Length > 3)
+        {
+            int exponent = raw.Length - 1;
+            double mantissa = double.Parse(raw.Substring(0, 4)) / 1000.0;
+            string display = $"{mantissa:F2}e{exponent}";
+            return display;
 
-    public Vector2Int GetAmount()
-    {
-        return amount;
-    }
-
-    public void AddAmount(int value, int eValue)
-    {
-        amount.x += value;
-        amount.y += eValue;
-    }
-
-    public bool SpendAmount(int value, int eValue)
-    {
-        return true;
         }
+        return "Null";
+    }
 
     
 
