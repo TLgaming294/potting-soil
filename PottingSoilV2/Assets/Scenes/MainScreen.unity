@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 94bb2f9613409f14c9e7a8a315c04dad, type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 1912510875}
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2267,7 +2267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912510874}
   - component: {fileID: 1912510873}
-  - component: {fileID: 1912510875}
+  - component: {fileID: 1912510876}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2288,7 +2288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &1912510874
 Transform:
@@ -2305,7 +2305,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912510875
+--- !u!114 &1912510876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

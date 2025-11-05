@@ -6,62 +6,64 @@ using System.Numerics;
 using UnityEngine.UIElements.Experimental;
 using System;
 
-public class CurrencyManager : MonoBehaviour
+namespace Psoil.Economy
 {
-    public static CurrencyManager Instance { get; private set; }
-    public static event Action<string, BigInteger> OnCurrencyAmountChanged;
-    public CurrencyListSO currencyDefinitions;
-    protected Dictionary<string, BigInteger> currencyAmounts = new Dictionary<string, BigInteger>();
-
-    public void Awake()
+    public class CurrencyManager : MonoBehaviour
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            InitCurrencies();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+        public static CurrencyManager Instance { get; private set; }
+        public static event Action<string, BigInteger> OnCurrencyAmountChanged;
+        public CurrencyListSO currencyDefinitions;
+        protected Dictionary<string, BigInteger> currencyAmounts = new Dictionary<string, BigInteger>();
 
-    private void InitCurrencies()
-    {
-        currencyAmounts.Clear();
-        foreach (var def in currencyDefinitions.allCurrencies)
+        public void Awake()
         {
-            currencyAmounts.Add(def.ID, def.InitValue);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+                InitCurrencies();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-    }
 
-    public void AddCurrency(string currencyID, BigInteger amount)
-    {
-        Debug.Log("event started");
-        if (currencyAmounts.ContainsKey(currencyID))
+        private void InitCurrencies()
         {
-            currencyAmounts[currencyID] += amount;
-            CurrencyManager.OnCurrencyAmountChanged?.Invoke(currencyID, currencyAmounts[currencyID]);
+            currencyAmounts.Clear();
+            foreach (var def in currencyDefinitions.allCurrencies)
+            {
+                currencyAmounts.Add(def.ID, def.InitValue);
+            }
         }
-        else
-        {
-            Debug.LogError($"Currency ID '{currencyID}' not found for addition.");
-        }
-    }
 
-    public BigInteger GetCurrency(string currencyID)
-    {
-        if (currencyAmounts.ContainsKey(currencyID))
+        public void AddCurrency(string currencyID, BigInteger amount)
         {
-            return currencyAmounts[currencyID];
+            //Debug.Log("event started");
+            if (currencyAmounts.ContainsKey(currencyID))
+            {
+                currencyAmounts[currencyID] += amount;
+                CurrencyManager.OnCurrencyAmountChanged?.Invoke(currencyID, currencyAmounts[currencyID]);
+            }
+            else
+            {
+                Debug.LogError($"Currency ID '{currencyID}' not found for addition.");
+            }
         }
-        else
+
+        public BigInteger GetCurrency(string currencyID)
         {
-            return 0;
+            if (currencyAmounts.ContainsKey(currencyID))
+            {
+                return currencyAmounts[currencyID];
+            }
+            else
+            {
+                return 0;
+            }
         }
+
     }
 
 }
-
-

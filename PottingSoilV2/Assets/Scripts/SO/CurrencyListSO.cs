@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Numerics;
 using System.Collections.Generic;
-
+namespace Psoil.Economy
+{
 [CreateAssetMenu(fileName = "CurrenciesData", menuName = "Game Data/Currencies list")]
 public class CurrencyListSO : ScriptableObject
 {
@@ -12,3 +13,5 @@ public class CurrencyListSO : ScriptableObject
         return allCurrencies.Find(c => c.ID == id);
     }
 }
+}
+
