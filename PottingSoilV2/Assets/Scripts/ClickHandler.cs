@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class ClickHandler : MonoBehaviour
 {
     private Camera _mainCamera;
-    public GameManager manager;
+    public PotScreenManager PotScreenManager;
 
     private void Awake()
     {
@@ -21,6 +21,6 @@ public class ClickHandler : MonoBehaviour
 
         if(!rayHit.collider) return;
         Debug.Log(rayHit.collider.gameObject.name);
-        manager.click(rayHit.collider.gameObject.name);
+        PotScreenManager.click(rayHit.collider.gameObject.name);
     }
 }

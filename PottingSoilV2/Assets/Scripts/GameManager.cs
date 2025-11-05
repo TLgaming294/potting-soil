@@ -41,33 +41,12 @@ public class GameManager : MonoBehaviour
         soilCounter--;
     }
 
-    public void click(string name)
-    {
 
 
-        if (name == "Pot")
-        {
-            if (mulchCount <= 0)
-            {
-                Debug.Log("insufficient Mulch");
-            }
-            else
-            {
-
-                soilCounter += soilAddJa;
-                mulchCount--;
-                
-            }
-
-        }
-        
-
-    }
-
-    void Update()
-    {
-        soilCounterText.SetText(soilCounter.ToString());
-        mulchCounterText.SetText(mulchCount.ToString());
-    }
+    // void Update()
+    // {
+    //     soilCounterText.SetText(soilCounter.ToString());
+    //     mulchCounterText.SetText(mulchCount.ToString());
+    // }
 
 }

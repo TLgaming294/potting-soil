@@ -3,41 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using System.Numerics;
+using UnityEngine.UIElements.Experimental;
+using System;
 
 public class CurrencyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static CurrencyManager Instance { get; private set; }
+    public static event Action<string, BigInteger> OnCurrencyAmountChanged;
+    public CurrencyListSO currencyDefinitions;
+    protected Dictionary<string, BigInteger> currencyAmounts = new Dictionary<string, BigInteger>();
+
+    public void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    
-}
-
-public class Currency
-{
-    public BigInteger value;
-
-    public string toMantissaView()
-    {
-        string raw = value.ToString();
-        if (raw.Length > 3)
+        if (Instance == null)
         {
-            int exponent = raw.Length - 1;
-            double mantissa = double.Parse(raw.Substring(0, 4)) / 1000.0;
-            string display = $"{mantissa:F2}e{exponent}";
-            return display;
-
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitCurrencies();
         }
-        return "Null";
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    
+    private void InitCurrencies()
+    {
+        currencyAmounts.Clear();
+        foreach (var def in currencyDefinitions.allCurrencies)
+        {
+            currencyAmounts.Add(def.ID, def.InitValue);
+        }
+    }
+
+    public void AddCurrency(string currencyID, BigInteger amount)
+    {
+        Debug.Log("event started");
+        if (currencyAmounts.ContainsKey(currencyID))
+        {
+            currencyAmounts[currencyID] += amount;
+            CurrencyManager.OnCurrencyAmountChanged?.Invoke(currencyID, currencyAmounts[currencyID]);
+        }
+        else
+        {
+            Debug.LogError($"Currency ID '{currencyID}' not found for addition.");
+        }
+    }
+
+    public BigInteger GetCurrency(string currencyID)
+    {
+        if (currencyAmounts.ContainsKey(currencyID))
+        {
+            return currencyAmounts[currencyID];
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
 }
+
+

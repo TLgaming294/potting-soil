@@ -8,20 +8,15 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject shopButton;
     public List<Unlock> unlocks = new List<Unlock>();
-    // Start is called before the first frame update
+
     void Start()
     {
-        // List<Unlock> unlocks = new List<Unlock>
-        // {
-        //     new Unlock(1, "Shop", false),
-        //     new Unlock(2, "Level 2", false)
-        // };
+
         unlocks.Add(new Unlock(1, "Shop", false));
         Unlock(1);
 
     }
 
-    // Update is called once per frame
     
     public void Unlock(int id)
     {
