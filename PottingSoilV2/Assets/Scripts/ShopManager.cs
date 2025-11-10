@@ -12,7 +12,7 @@ namespace Psoil.Economy
         public ExchangeListSO exchangeDefinitions;
         void Start()
         {
-            InitExchanges();  
+            InitExchanges();
         }
         /* public GameObject shopView;
 
@@ -88,6 +88,14 @@ namespace Psoil.Economy
          {
              AllExchanges.exchangables.Add(new CurrencyExchange { id = 1, currencyExchangeName = "Soil to Mulch", cost = 1 });
          }*/
+        public GameObject shopView;
+
+        public void toggleShop()
+         {
+             Debug.Log("Toggling Shop View");
+             shopView.SetActive(!shopView.activeSelf);
+         }
+        
 
 
         List<Exchange> allExchanges = new List<Exchange>();

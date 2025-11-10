@@ -952,10 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76f264b9f5b76f4f8a43c42a332cd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exchangeDefinitions: {fileID: 0}
   shopView: {fileID: 1743071738}
-  gameManager: {fileID: 1268601397}
-  Content: {fileID: 0}
-  shopUpgradePrefab: {fileID: 7592193358362807316, guid: 26745ee67f715917ebaec3dcb650cfbd, type: 3}
 --- !u!4 &769870900
 Transform:
   m_ObjectHideFlags: 0
@@ -2186,8 +2184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 1080}
+  m_AnchoredPosition: {x: 0, y: -0.33728027}
+  m_SizeDelta: {x: 600, y: 1079.7}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1743071740
 MonoBehaviour:
