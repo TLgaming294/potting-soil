@@ -16,3 +16,10 @@ MonoBehaviour:
   - ID: SOIL_TO_MULCH
     FromCurrencyID: SOIL
     ToCurrencyID: MULCH
+    initFromAmount: 1
+    initToAmount: 1
+  - ID: MULCH_TO_SOIL
+    FromCurrencyID: MULCH
+    ToCurrencyID: SOIL
+    initFromAmount: 1
+    initToAmount: 2

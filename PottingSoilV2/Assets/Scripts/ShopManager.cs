@@ -12,7 +12,6 @@ namespace Psoil.Economy
         public ExchangeListSO exchangeDefinitions;
         void Start()
         {
-            InitExchanges();
         }
         /* public GameObject shopView;
 
@@ -98,7 +97,7 @@ namespace Psoil.Economy
         
 
 
-        List<Exchange> allExchanges = new List<Exchange>();
+        /*List<Exchange> allExchanges = new List<Exchange>();
 
         private void InitExchanges()
         {
@@ -119,6 +118,6 @@ namespace Psoil.Economy
             }
             currencyManager.AddCurrency(exchange.FromCurrencyID, -exchange.FromAmount);
             currencyManager.AddCurrency(exchange.ToCurrencyID, exchange.ToAmount);
-        }
+        }*/
     }
 }
