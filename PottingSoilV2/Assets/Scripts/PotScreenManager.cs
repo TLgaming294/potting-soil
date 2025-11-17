@@ -9,7 +9,7 @@ public class PotScreenManager : MonoBehaviour
 
     public void Start()
     {
-        
+
     }
 
 
@@ -17,7 +17,7 @@ public class PotScreenManager : MonoBehaviour
     {
         if (name == "Pot")
         {
-            if ( currencyManager.GetCurrency("MULCH") <= 0)
+            if (currencyManager.GetCurrency("MULCH") <= 0)
             {
                 Debug.Log("insufficient Mulch");
             }

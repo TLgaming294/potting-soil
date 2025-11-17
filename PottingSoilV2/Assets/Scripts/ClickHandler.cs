@@ -15,11 +15,11 @@ public class ClickHandler : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        if(!context.started) return;
+        if (!context.started) return;
 
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
-        if(!rayHit.collider) return;
+        if (!rayHit.collider) return;
         Debug.Log(rayHit.collider.gameObject.name);
         PotScreenManager.click(rayHit.collider.gameObject.name);
     }

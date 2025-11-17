@@ -1,78 +1,71 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
 
-
-public class NewBehaviourScript : MonoBehaviour
+namespace Psoil.Economy
 {
-    public GameObject shopButton;
-    public List<Unlock> unlocks = new List<Unlock>();
-
-    void Start()
+    public class UnlockManager : MonoBehaviour
     {
+        public static event Action<string, bool> OnUnlockChanged;
+        public GameObject shopButton;
+        public List<Unlock> unlocks = new List<Unlock>();
 
-        unlocks.Add(new Unlock(1, "Shop", false));
-        Unlock(1);
-
-    }
-
-    
-    public void Unlock(int id)
-    {
-        unlocks.Find(x => x.getId() == id).setIsUnlocked(true);
-
-        UpdateUnlocks();
-    }
-
-    [ContextMenu("Update Unlocks")]
-    void UpdateUnlocks()
-    {
-        foreach (Unlock unlock in unlocks)
+        void Start()
         {
-                switch (unlock.getId())
-                {
-                    case 1:
-                        shopButton.SetActive(unlock.getIsUnlocked());
-                        break;
-                    // case 2:
-                    //     GameObject.Find("Level2").SetActive(true);
-                    //     break;
-                    default:
-                        Debug.Log("Invalid unlock id");
-                        break;
-                }
+
+            unlocks.Add(new Unlock("SHOP_BUTTON", "Shop", false));
+            Unlock("SHOP_BUTTON");
+
+        }
+
+
+        public void Unlock(string id)
+        {
+            unlocks.Find(x => x.getId() == id).setIsUnlocked(true);
+            OnUnlockChanged?.Invoke(id, true);
+            UpdateUnlocks();
+        }
+
+        [ContextMenu("Update Unlocks")]
+        void UpdateUnlocks()
+        {
+            foreach (Unlock unlock in unlocks)
+            {
+                OnUnlockChanged?.Invoke(unlock.id.ToString(), unlock.getIsUnlocked());
+            }
         }
     }
+
+
+
+
+    [System.Serializable]
+    public class Unlock
+    {
+        public Unlock(string id, string name, bool isUnlocked)
+        {
+            this.id = id;
+            this.name = name;
+            this.isUnlocked = isUnlocked;
+        }
+        public string id;
+        string name;
+        public bool isUnlocked;
+
+        public string getId()
+        {
+            return this.id;
+        }
+        public bool getIsUnlocked()
+        {
+            return this.isUnlocked;
+        }
+        public void setIsUnlocked(bool isUnlocked)
+        {
+            this.isUnlocked = isUnlocked;
+        }
+    }
+
 }
-
-    
-
-
-[System.Serializable]
-public class Unlock
-{
-    public Unlock(int id, string name, bool isUnlocked)
-    {
-        this.id = id;
-        this.name = name;
-        this.isUnlocked = isUnlocked;
-    }
-    public int id;
-    string name;
-    public bool isUnlocked;
-
-    public int getId()
-    {
-        return this.id;
-    }
-    public bool getIsUnlocked()
-    {
-        return this.isUnlocked;
-    }
-    public void setIsUnlocked(bool isUnlocked)
-    {
-        this.isUnlocked = isUnlocked;
-    }
-}
-
