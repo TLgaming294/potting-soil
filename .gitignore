@@ -10,6 +10,13 @@ PottingSoilV2/[Bb]uild/
 PottingSoilV2/[Bb]uilds/
 PottingSoilV2/[Ll]ogs/
 PottingSoilV2/[Uu]ser[Ss]ettings/
+PottingSoilV3/[Ll]ibrary/
+PottingSoilV3/[Tt]emp/
+PottingSoilV3/[Oo]bj/
+PottingSoilV3/[Bb]uild/
+PottingSoilV3/[Bb]uilds/
+PottingSoilV3/[Ll]ogs/
+PottingSoilV3/[Uu]ser[Ss]ettings/
 *.log
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
@@ -19,9 +26,11 @@ PottingSoilV2/[Uu]ser[Ss]ettings/
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 PottingSoilV2/[Mm]emoryCaptures/
+PottingSoilV3/[Mm]emoryCaptures/
 
 # Recordings can get excessive in size
 PottingSoilV2/[Rr]ecordings/
+PottingSoilV3/[Rr]ecordings/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
