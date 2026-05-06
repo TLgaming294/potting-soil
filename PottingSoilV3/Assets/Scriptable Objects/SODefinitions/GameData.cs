@@ -5,23 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Game Data")]
 public class GameData : ScriptableObject
 {
-    List<Currency> currencies = new List<Currency>();
+	[field: SerializeField] public List<Currency> currencies { get; set; } = new List<Currency>();
 
-    public bool TryChangeCurrency(CurrencyType type, double amount)
-    {
-        Currency data = currencies.Find(c => c.CurrencyType == type);
+	public bool TryChangeCurrency(CurrencyType type, double amount)
+	{
+		Currency data = currencies.Find(c => c.CurrencyType == type);
 
-        if (data == null) return false;
-        if (data.Amount< Math.Abs(amount)) return false;
+		if (data == null) return false;
+		if (data.Amount < Math.Abs(amount)) return false;
 
-        if (amount < 0)
-        {
-            data.Amount -= amount;
-            return true;
-        }
-        
-        data.Amount += amount;
-        return true;
-    }
+		if (amount < 0)
+		{
+			data.Amount -= amount;
+			return true;
+		}
+
+		data.Amount += amount;
+		return true;
+	}
 
 }

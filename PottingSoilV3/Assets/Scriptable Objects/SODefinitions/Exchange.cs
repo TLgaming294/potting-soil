@@ -1,17 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Objects/Exchange")]
 public class Exchange : ScriptableObject
 {
-    [field:SerializeField] public Currency CurrencyFrom{get;set;}
-    [field:SerializeField] public Currency CurrencyTo{get;set;}
-    [field:SerializeField] public int amountFromTo{get;set;}
-    [field:SerializeField] public float multiplyer{get;set;}
+	[field: SerializeField] public CurrencyType CurrencyFrom { get; set; }
+	[field: SerializeField] public CurrencyType CurrencyTo { get; set; }
+	[field: SerializeField] public GameData data { get; set; }
 
-    public void convert(int amount)
-    {
-        
-    }
+	[field: SerializeField] public double amountFrom { get; set; }
+	[field: SerializeField] public double amountTo { get; set; }
+	[field: SerializeField] public double multiplyer { get; set; } = 1;
+
+	public void convert(double amountToConvert)
+	{
+		if (data.TryChangeCurrency(CurrencyFrom, -amountFrom * amountToConvert))
+		{
+			data.TryChangeCurrency(CurrencyTo, amountTo * multiplyer * amountToConvert);
+		}
+	}
 
 }

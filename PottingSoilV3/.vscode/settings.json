@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "PottingSoilV3.sln"
+    "dotnet.defaultSolution": "PottingSoilV3.sln",
+    "editor.formatOnSave": true
 }
