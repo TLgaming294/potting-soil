@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Objects/Exchange")]
 public class Exchange : ScriptableObject
 {
-	[field: SerializeField] public CurrencyType CurrencyFrom { get; set; }
-	[field: SerializeField] public CurrencyType CurrencyTo { get; set; }
+	[field: SerializeField] public CurrencySO CurrencyFrom { get; set; }
+	[field: SerializeField] public CurrencySO CurrencyTo { get; set; }
 	[field: SerializeField] public GameData data { get; set; }
 
 	[field: SerializeField] public double amountFrom { get; set; }
@@ -13,9 +13,9 @@ public class Exchange : ScriptableObject
 
 	public void convert(double amountToConvert)
 	{
-		if (data.TryChangeCurrency(CurrencyFrom, -amountFrom * amountToConvert))
+		if (CurrencyManager.Instance.TryChangeCurrency(CurrencyFrom.CurrencyType, -amountFrom * amountToConvert))
 		{
-			data.TryChangeCurrency(CurrencyTo, amountTo * multiplyer * amountToConvert);
+			CurrencyManager.Instance.TryChangeCurrency(CurrencyTo.CurrencyType, amountTo * multiplyer * amountToConvert);
 		}
 	}
 

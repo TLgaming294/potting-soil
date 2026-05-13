@@ -1,21 +1,18 @@
 using UnityEngine;
 
-public enum CurrencyType
+public class CurrencySO : ScriptableObject
 {
-	Soil,
-	Mulch,
-	Croins,
-	DudeSouls
+	[field: SerializeField] public string CurrencyType { get; set; }
 
 }
 
 [System.Serializable]
-public class Currency
+public class LiveCurrency
 {
-	[field: SerializeField] public CurrencyType CurrencyType { get; set; }
+	[field: SerializeField] public string CurrencyType { get; set; }
 	[field: SerializeField] public double Amount { get; set; }
 
-	public Currency(CurrencyType type, double amount)
+	public LiveCurrency(string type, double amount)
 	{
 		CurrencyType = type;
 		Amount = amount;
