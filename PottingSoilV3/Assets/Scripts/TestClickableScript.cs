@@ -1,14 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 public class TestClickableScript : MonoBehaviour, IClickable
 {
+	[SerializeField] private CurrencySO mulchConfig;
+	[SerializeField] private CurrencySO soilConfig;
+
 	public void OnClicked()
 	{
-		Debug.Log("CLicked the box");
+		if (CurrencyManager.Instance.TryDeductCurrency(mulchConfig, 1))
+		{
+			CurrencyManager.Instance.AddCurrency(soilConfig, 2);
+			Debug.Log("Converted 1 Mulch into 1 Soil!");
+		}
+		else
+		{
+			Debug.Log("Not enough Mulch!");
+		}
 	}
-
 
 }

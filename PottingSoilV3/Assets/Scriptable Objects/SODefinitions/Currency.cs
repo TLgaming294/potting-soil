@@ -1,20 +1,21 @@
 using UnityEngine;
-
+[CreateAssetMenu(menuName = "Data/Currency")]
 public class CurrencySO : ScriptableObject
 {
-	[field: SerializeField] public string CurrencyType { get; set; }
+	public string displayName;
+	public double startingAmount;
 
 }
 
 [System.Serializable]
 public class LiveCurrency
 {
-	[field: SerializeField] public string CurrencyType { get; set; }
+	[field: SerializeField] public string CurrencyName { get; set; }
 	[field: SerializeField] public double Amount { get; set; }
 
-	public LiveCurrency(string type, double amount)
+	public LiveCurrency(string name, double amount)
 	{
-		CurrencyType = type;
+		CurrencyName = name;
 		Amount = amount;
 	}
 }

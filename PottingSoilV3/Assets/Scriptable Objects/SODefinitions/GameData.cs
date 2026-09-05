@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Data/Game Data")]
-public class GameData : ScriptableObject
+public class GameData
 {
-	[field: SerializeField] public List<LiveCurrency> LiveCurrencies { get; set; } = new List<LiveCurrency>();
+	[field: SerializeField] public List<LiveCurrency> SavedCurrencies { get; set; } = new List<LiveCurrency>();
 
 }
