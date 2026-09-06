@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class TestClickableScript : MonoBehaviour, IClickable
+public class PotClickable : MonoBehaviour, IClickable
 {
 	[SerializeField] private CurrencySO mulchConfig;
 	[SerializeField] private CurrencySO soilConfig;

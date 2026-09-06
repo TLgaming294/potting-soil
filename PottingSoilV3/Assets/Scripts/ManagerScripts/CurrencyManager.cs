@@ -6,7 +6,7 @@ public class CurrencyManager : MonoBehaviour
 {
 	public static CurrencyManager Instance;
 	[SerializeField] private Dictionary<CurrencySO, LiveCurrency> currencyDict = new Dictionary<CurrencySO, LiveCurrency>();
-
+	public static event Action<CurrencySO, double> OnCurrencyChanged;
 	void Awake()
 	{
 		if (Instance == null)
@@ -44,6 +44,7 @@ public class CurrencyManager : MonoBehaviour
 			{
 				liveData.Amount -= amount;
 				Debug.Log($"Deducted {amount} {currency.displayName}. Remaining: {liveData.Amount}");
+				OnCurrencyChanged?.Invoke(currency, liveData.Amount);
 				return true;
 			}
 		}
@@ -60,6 +61,7 @@ public class CurrencyManager : MonoBehaviour
 		if (currencyDict.TryGetValue(currency, out LiveCurrency liveData))
 		{
 			liveData.Amount += amount;
+			OnCurrencyChanged?.Invoke(currency, liveData.Amount);
 			Debug.Log($"Added {amount} {currency.displayName}. Total: {liveData.Amount}");
 		}
 	}
@@ -71,5 +73,10 @@ public class CurrencyManager : MonoBehaviour
 			return liveData.Amount;
 		}
 		return 0;
+	}
+
+	public Dictionary<CurrencySO, LiveCurrency> GetAllCurrencies()
+	{
+		return currencyDict;
 	}
 }
