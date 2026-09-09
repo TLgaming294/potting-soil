@@ -19,6 +19,13 @@ public class CurrencyManager : MonoBehaviour
 			Destroy(this);
 		}
 	}
+	void Start()
+	{
+		foreach (var cur in currencyDict)
+		{
+			OnCurrencyChanged?.Invoke(cur.Key, cur.Value.Amount);
+		}
+	}
 
 	private void InitializeCurrencies()
 	{
@@ -79,4 +86,5 @@ public class CurrencyManager : MonoBehaviour
 	{
 		return currencyDict;
 	}
+
 }
