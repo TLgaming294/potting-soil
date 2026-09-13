@@ -1,13 +1,15 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Exchange")]
-public class ExchangeSO : ScriptableObject
+public class ExchangeSO : ExchangableSO
 {
-	public CurrencySO inputCurrency;
-	public CurrencySO outputCurrency;
+	public ExchangableSO inputCurrency;
+	public ExchangableSO outputCurrency;
 	public double baseInputAmount;
 	public double baseOutputAmount;
 }
+
+public class ExchangableSO : ScriptableObject { }
 
 [System.Serializable]
 public class LiveExchange

@@ -44,14 +44,46 @@ public class ExchangeManager : MonoBehaviour
 
 		if (exchangeMap.TryGetValue(config, out LiveExchange liveData))
 		{
-			if (CurrencyManager.Instance.TryDeductCurrency(config.inputCurrency, liveData.CurrentInputAmount))
-			{
-				CurrencyManager.Instance.AddCurrency(config.outputCurrency, liveData.CurrentOutputAmount);
-				return true;
-			}
+			bool inputDeducted = DeductResource(config.inputCurrency, liveData.CurrentInputAmount);
+
+			if (!inputDeducted) return false;
+
+			AddResource(config.outputCurrency, liveData.CurrentOutputAmount);
+			return true;
 		}
 
 		return false;
+	}
+
+	private bool DeductResource(ExchangableSO resource, double amount)
+	{
+		if (resource is CurrencySO currency)
+		{
+			// Compiler weiß hier sicher: 'currency' ist ein CurrencySO
+			return CurrencyManager.Instance.TryDeductCurrency(currency, amount);
+		}
+		/*else if (resource is DudeSO dude)
+		{
+			// Falls du Dudes als Kosten opferst
+			return DudeManager.Instance.TryKillDudes(dude, (int)amount);
+		}*/
+
+		return false;
+	}
+
+	private void AddResource(ExchangableSO resource, double amount)
+	{
+		if (resource is CurrencySO currency)
+		{
+			CurrencyManager.Instance.AddCurrency(currency, amount);
+		}
+		/*else if (resource is DudeSO dude)
+		{
+			for (int i = 0; i < (int)amount; i++)
+			{
+				DudeManager.Instance.AddDudeSeed(dude);
+			}
+		}*/
 	}
 
 	public LiveExchange GetLiveExchange(ExchangeSO config)
@@ -67,7 +99,7 @@ public class ExchangeManager : MonoBehaviour
 	{
 		if (exchangeMap.TryGetValue(config, out LiveExchange liveData))
 		{
-			liveData.InputMultiplier = Math.Max(1.0, newMultiplier);
+			liveData.InputMultiplier = newMultiplier;
 			OnExchangeUpdated?.Invoke(config, liveData);
 		}
 	}

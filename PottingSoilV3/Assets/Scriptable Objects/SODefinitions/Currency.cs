@@ -1,6 +1,6 @@
 using UnityEngine;
 [CreateAssetMenu(menuName = "Data/Currency")]
-public class CurrencySO : ScriptableObject
+public class CurrencySO : ExchangableSO
 {
 	public string displayName;
 	public double startingAmount;
