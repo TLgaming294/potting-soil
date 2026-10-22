@@ -32,7 +32,6 @@ public class LiveDude
 	public int RemainingLifetime { get; private set; }
 	public ExchangeSO job;
 
-	// Event, damit z. B. die UI oder das 3D-Modell weiß, wenn der Dude wächst, arbeitet oder stirbt
 	public event Action<LiveDude> OnStateChanged;
 	public event Action<LiveDude> OnTickExecuted;
 
