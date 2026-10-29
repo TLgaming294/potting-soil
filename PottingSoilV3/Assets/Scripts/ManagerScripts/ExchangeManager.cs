@@ -11,7 +11,7 @@ public class ExchangeManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance == null)
+		if (Instance is null)
 		{
 			Instance = this;
 			InitializeExchanges();
@@ -59,7 +59,6 @@ public class ExchangeManager : MonoBehaviour
 	{
 		if (resource is CurrencySO currency)
 		{
-			// Compiler weiß hier sicher: 'currency' ist ein CurrencySO
 			return CurrencyManager.Instance.TryDeductCurrency(currency, amount);
 		}
 		/*else if (resource is DudeSO dude)

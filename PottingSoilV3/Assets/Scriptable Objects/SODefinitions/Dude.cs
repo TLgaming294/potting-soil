@@ -19,6 +19,7 @@ public enum DudeState
 {
 	Growing,
 	Working,
+	Idle,
 	Dead
 }
 
