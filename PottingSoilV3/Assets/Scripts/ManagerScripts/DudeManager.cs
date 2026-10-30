@@ -13,10 +13,38 @@ public class DudeManager : MonoBehaviour
 	public static DudeManager Instance;
 	private Dictionary<DudeSO, DudeStock> stock = new Dictionary<DudeSO, DudeStock>();
 	private List<LiveDude> activeDudes = new List<LiveDude>();
-	public event Action<DudeSO> OnStockChanged;
+	public event Action<DudeSO, DudeStock> OnStockChanged;
 	void Awake()
 	{
-		if (Instance is null) Instance = this; else Destroy(this);
+		if (Instance is null) { Instance = this; InitializeDudes(); } else Destroy(this);
+
+	}
+	void Start()
+	{
+		foreach (var dude in stock)
+		{
+			OnStockChanged?.Invoke(dude.Key, dude.Value);
+		}
+	}
+
+	private void InitializeDudes()
+	{
+		stock.Clear();
+
+		// Automatically loads every DudeSO in Resources/Dudes folder
+		DudeSO[] loadedCurrencies = Resources.LoadAll<DudeSO>("Dudes");
+
+		foreach (DudeSO config in loadedCurrencies)
+		{
+			stock[config] = new DudeStock();
+		}
+	}
+	void Update()
+	{
+
+	}
+	public void TickAllActive()
+	{
 
 	}
 }

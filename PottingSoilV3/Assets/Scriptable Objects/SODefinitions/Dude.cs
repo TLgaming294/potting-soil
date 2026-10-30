@@ -46,14 +46,14 @@ public class LiveDude
 	{
 		if (State == DudeState.Dead) return;
 
-		timer += deltaTime;
+		if (State != DudeState.Idle) timer += deltaTime;
 
 		if (State == DudeState.Growing)
 		{
 			if (timer >= Config.growTime)
 			{
-				timer = 0; // Restzeit mitnehmen
-				State = DudeState.Working;
+				timer = 0; // Remove leftover time
+				State = DudeState.Idle;
 				OnStateChanged?.Invoke(this);
 			}
 			return;
